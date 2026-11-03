@@ -1,0 +1,42 @@
+# Black Valley — maths
+
+Built on Engine's math-sdk (github.com/engineio/math-sdk). Spec: "Black Valley — Maths & Mechanics Spec"
+(Claude doc). Game code lives in `black_valley/`; the SDK is not vendored.
+
+## Setup (once)
+
+```
+git clone https://github.com/engineio/math-sdk ../math-sdk
+cd ../math-sdk && make setup && source env/bin/activate
+ln -s "$(pwd)/../black-valley/math/black_valley" games/black_valley   # Windows: mklink /D
+```
+
+Rust/Cargo is needed for the optimiser.
+
+## Run (from the math-sdk root)
+
+```
+python games/black_valley/tools/make_reels.py                        # rebuild reel strips (seeded)
+python games/black_valley/tools/natural_stats.py --n 100000          # unforced game shape
+python games/black_valley/run.py --modes base --sims 20000 --no-opt  # quick books
+python games/black_valley/run.py --sims 1000000                      # full: sims, optimiser, analysis, checks
+```
+
+Outputs go to `black_valley/library/` (not committed until the release build).
+
+## Status
+
+| Stage | What | State |
+|---|---|---|
+| 1 | Base game: 25 lines, cascades, paytable, strips | done |
+| 2 | The Knock, The Pit, The Fire, The Village Fights Back | next |
+| 3 | Strike / Uprising / Final Stand, boosts, buys | |
+| 4 | Optimiser to 96.50% per mode, Model A vs B, checks | |
+
+### Stage 1 measurement (natural, unforced, 100k rounds, lines + cascades only)
+
+RTP 42.1% · hit rate 29.6% · beats the stake 12.8% · std dev 1.03 · avg 0.35 cascades per round (max 7).
+The optimiser sets the final hit rate and RTP per mode by weighting rounds; features and bonuses add the rest.
+
+Paytable changed from spec v0.1: the draft values were line-bet sized and gave a 6% base RTP; all pays were
+scaled up (H1 5-of-a-kind 40x, L 5-of-a-kind 3-4x total bet). See `game_config.py`.
