@@ -32,7 +32,7 @@ Outputs go to `black_valley/library/` (not committed until the release build).
 | 1 | Base game: 25 lines, cascades, paytable, strips | done |
 | 2 | The Knock, The Pit, The Fire, The Village Fights Back | done |
 | 3 | Strike / Uprising / Final Stand, boosts, buys | done |
-| 4 | Optimiser to 96.50% per mode, Model A vs B, checks | next |
+| 4 | Optimiser to 96.50% per mode, Model A vs B, checks | done (100k per mode; 1M run before upload) |
 
 ### Stage 1 measurement (natural, unforced, 100k rounds, lines + cascades only)
 
@@ -78,3 +78,49 @@ The optimiser (stage 4) closes the remaining gaps by weighting rounds. `freeSpin
 reach 20,000x; the optimiser gives these rounds their real, tiny weight.
 
 `check_books.py`: 8,000 books in each of the six modes, 0 failures.
+
+### Stage 4: tuned results (Model A, 100,000 rounds per mode)
+
+| Mode | Cost | RTP | Hit rate | Beats cost | Std dev | Strike | Uprising | Final Stand | 20,000x |
+|---|---|---|---|---|---|---|---|---|---|
+| base | 1x | 96.50% | 39.0% | 14.5% | 9.19 | 1 in 309 | 1 in 1,434 | 1 in 14,621 | 1 in 8.0M |
+| more_features | 1.5x | 96.50% | 43.4% | 15.7% | 12.22 | 1 in 227 | 1 in 986 | 1 in 6,975 | 1 in 5.3M |
+| bonus_chance | 2x | 96.50% | 40.2% | 8.5% | 15.46 | 1 in 81 | 1 in 353 | 1 in 2,109 | 1 in 4.0M |
+| strike | 60x | 96.50% | 100% | 24.9% | 83.4 | always | | | max 1,778x |
+| uprising | 120x | 96.50% | 100% | 24.6% | 159.8 | | always | | max 2,486x |
+| final_stand | 250x | 96.50% | 100% | 35.5% | 249.3 | | | always | 1 in 32,000 |
+
+Engine's checks (`execute_all_tests`): all six modes SHA-256 and payout hash OK, risk checks 6 of 6 pass,
+max base bet up to $1,000. `check_books.py` over every book.
+
+Bonus odds are rarer than the brief's 1 in 120-180: at that rate the bonuses alone would put base above 100% RTP.
+The brief allows this ("do not hardcode these bounds if they prevent the target return").
+
+### Model A vs Model B (base mode, same 96.50%)
+
+| | Model A (steadier) - chosen | Model B (spikier) |
+|---|---|---|
+| Hit rate | 39.0% | 37.6% |
+| Beats the stake | 14.5% (1 in 6.9) | 12.9% (1 in 7.8) |
+| 2x+ | 1 in 11 | 1 in 15 |
+| 5x+ | 1 in 53 | 1 in 83 |
+| 25x+ | 1 in 148 | 1 in 123 |
+| 50x+ | 1 in 259 | 1 in 182 |
+| 100x+ | 1 in 1,586 | 1 in 1,033 |
+| Std dev | 9.19 | 9.65 |
+
+Switch with `BV_MODEL=B python games/black_valley/run.py --modes base --no-sims`.
+
+### How the shape is controlled
+
+The optimiser matches groups ("fences") by tags in the rounds, not by win ranges. The game tags bonus rounds
+(`symbol: scatter`) and base rounds by win size (`band: sub` below 1x, `band: low` 1x-2x); everything else
+is 2x+. Each group gets its own frequency and RTP share in `game_optimization.py`, so hit rate and the share
+of spins beating the stake are set directly. Engine's sample mean-to-median setting (4-8) was lowered.
+
+### Before upload
+
+Run the full 1,000,000-round build on a machine with 8+ cores (here: 2 cores, so 100k):
+`python games/black_valley/run.py --sims 1000000 --batch 25000` (about 30-60 minutes), then
+`tools/lut_report.py` and `tools/check_books.py` for every mode. The round files (~2.5 GB at 1M) are not
+committed; upload `library/publish_files/` to Engine.

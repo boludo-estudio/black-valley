@@ -25,7 +25,8 @@ from optimization_program.optimization_config import (
 
 RTP = 0.965
 WINCAP_RTP = 0.0025
-SUB_AVG = 0.55      # target average of below-stake wins (they run 0.40x-0.90x, natural average 0.55x)
+SUB_AVG = 0.55      # below-stake wins run 0.40x-0.90x, natural average 0.55x
+LOW_AVG = 1.31      # 1x-2x wins, natural average 1.31x
 
 
 def scaling(model):
@@ -38,8 +39,9 @@ def scaling(model):
         ]
     return [               # A, steadier: wins pulled from below the stake into 1x-5x, fewer extreme bonuses
         {"criteria": "basegame", "scale_factor": 0.6, "win_range": (0.01, 1), "probability": 1.0},
-        {"criteria": "basegame", "scale_factor": 2.0, "win_range": (1, 5), "probability": 1.0},
-        {"criteria": "basegame", "scale_factor": 1.2, "win_range": (5, 20), "probability": 1.0},
+        {"criteria": "basegame", "scale_factor": 0.8, "win_range": (1, 2), "probability": 1.0},
+        {"criteria": "basegame", "scale_factor": 1.8, "win_range": (2, 10), "probability": 1.0},
+        {"criteria": "basegame", "scale_factor": 1.2, "win_range": (10, 20), "probability": 1.0},
         {"criteria": "basegame", "scale_factor": 0.8, "win_range": (50, 500), "probability": 1.0},
         {"criteria": "freegame", "scale_factor": 1.2, "win_range": (20, 200), "probability": 1.0},
         {"criteria": "freegame", "scale_factor": 0.8, "win_range": (1000, 10000), "probability": 1.0},
@@ -66,24 +68,31 @@ class OptimizationSetup:
         # Normal-spin wins are split by size so the share of spins that beat the stake is set directly:
         # "sub" = wins below the stake, "basegame" = everything else left (1x and up).
         #            beats-stake 1 in N, sub-stake 1 in N
-        shape = {"A": (6.67, 4.55), "B": (10.0, 3.6)}[model]
+        # Normal-spin wins are split by size so their shape is set directly:
+        # "sub" below the stake, "low" 1x-2x, "basegame" = everything else left (2x and up).
+        #          sub 1 in N, low 1 in N, 2x+ 1 in N (per mode: base / more_features / bonus_chance)
+        shape = {
+            "A": {"sub": 4.55, "low": 13.3, "big": {"base": 11, "more_features": 7.5, "bonus_chance": 11}},
+            "B": {"sub": 4.2, "low": 14.0, "big": {"base": 16, "more_features": 11, "bonus_chance": 16}},
+        }[model]
 
         def spin_mode(name, fs_hr, fs_rtp, cost):
-            win_hr, sub_hr = shape
-            sub_rtp = round(SUB_AVG / (sub_hr * cost), 5)  # below-stake wins: 0.40x-0.90x
-            base_rtp = round(RTP - fs_rtp - WINCAP_RTP - sub_rtp, 5)
+            sub_rtp = round(SUB_AVG / (shape["sub"] * cost), 5)
+            low_rtp = round(LOW_AVG / (shape["low"] * cost), 5)
+            base_rtp = round(RTP - fs_rtp - WINCAP_RTP - sub_rtp - low_rtp, 5)
             return {
                 "conditions": {
                     "wincap": ConstructConditions(rtp=WINCAP_RTP, av_win=cap[name], search_conditions=cap[name]).return_dict(),
                     "0": ConstructConditions(rtp=0, av_win=0, search_conditions=0).return_dict(),
                     "freegame": ConstructConditions(rtp=fs_rtp, hr=fs_hr, search_conditions={"symbol": "scatter"}).return_dict(),
-                    "sub": ConstructConditions(rtp=sub_rtp, hr=sub_hr, search_conditions={"band": "sub"}).return_dict(),
-                    "basegame": ConstructConditions(rtp=base_rtp, hr=win_hr).return_dict(),
+                    "sub": ConstructConditions(rtp=sub_rtp, hr=shape["sub"], search_conditions={"band": "sub"}).return_dict(),
+                    "low": ConstructConditions(rtp=low_rtp, hr=shape["low"], search_conditions={"band": "low"}).return_dict(),
+                    "basegame": ConstructConditions(rtp=base_rtp, hr=shape["big"][name]).return_dict(),
                 },
                 "scaling": ConstructScaling(scaling(model)).return_dict(),
                 "parameters": params([50, 100, 200], model),
                 "distribution_bias": ConstructFenceBias(
-                    applied_criteria=["basegame"], bias_ranges=[(1.0, 5.0)], bias_weights=[0.6]
+                    applied_criteria=["basegame"], bias_ranges=[(2.0, 8.0)], bias_weights=[0.5]
                 ).return_dict(),
             }
 

@@ -22,6 +22,7 @@ if __name__ == "__main__":
     ap.add_argument("--modes", nargs="*", default=None, help="default: every mode in game_config")
     ap.add_argument("--sims", type=int, default=1_000_000)
     ap.add_argument("--threads", type=int, default=8)
+    ap.add_argument("--batch", type=int, default=None, help="rounds per thread per batch (lower = less memory)")
     ap.add_argument("--rust-threads", type=int, default=16)
     ap.add_argument("--no-opt", action="store_true", help="skip the optimiser")
     ap.add_argument("--no-sims", action="store_true", help="reuse the books already in library/")
@@ -37,7 +38,7 @@ if __name__ == "__main__":
     num_sim_args = {m: args.sims for m in modes}
 
     if not args.no_sims:
-        create_books(gamestate, config, num_sim_args, batch_size=max(args.sims // args.threads, 1),
+        create_books(gamestate, config, num_sim_args, batch_size=args.batch or max(args.sims // args.threads, 1),
                      threads=args.threads, compress=True, profiling=False)
     generate_configs(gamestate)
 
