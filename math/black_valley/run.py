@@ -24,26 +24,28 @@ if __name__ == "__main__":
     ap.add_argument("--threads", type=int, default=8)
     ap.add_argument("--rust-threads", type=int, default=16)
     ap.add_argument("--no-opt", action="store_true", help="skip the optimiser")
+    ap.add_argument("--no-sims", action="store_true", help="reuse the books already in library/")
     ap.add_argument("--no-analysis", action="store_true")
     ap.add_argument("--no-checks", action="store_true")
     args = ap.parse_args()
 
     config = GameConfig()
     gamestate = GameState(config)
+    if not (args.no_opt and args.no_analysis):
+        OptimizationSetup(config)          # targets must exist before configs are written
     modes = args.modes or [bm.get_name() for bm in config.bet_modes]
     num_sim_args = {m: args.sims for m in modes}
 
-    create_books(gamestate, config, num_sim_args, batch_size=max(args.sims // args.threads, 1),
-                 threads=args.threads, compress=True, profiling=False)
+    if not args.no_sims:
+        create_books(gamestate, config, num_sim_args, batch_size=max(args.sims // args.threads, 1),
+                     threads=args.threads, compress=True, profiling=False)
     generate_configs(gamestate)
 
     if not args.no_opt:
-        OptimizationSetup(config)
         OptimizationExecution().run_all_modes(config, modes, args.rust_threads)
         generate_configs(gamestate)
 
     if not args.no_analysis:
-        OptimizationSetup(config)
         create_stat_sheet(gamestate, custom_keys=[{"symbol": "scatter"}])
 
     if not args.no_checks:

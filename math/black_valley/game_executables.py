@@ -217,6 +217,8 @@ class GameExecutables(GameCalculations):
         """Choirs on the trigger board decide the bonus: 3 Strike, 4 Uprising, 5 Final Stand."""
         n = min(self.count_special_symbols("scatter"), 5)
         self.bonus = self.config.bonus_by_scatters[n]
+        # the optimiser finds bonus rounds by this record (same keys as the SDK's own trigger)
+        self.record({"kind": n, "symbol": "scatter", "gametype": self.gametype})
         self.record({"bonus": self.bonus, "gametype": self.gametype})
         self.update_freespin_amount()                      # emits freeSpinTrigger (totalFs from the config)
         self.tot_fs = self.config.bonus_rules[self.bonus]["spins"]

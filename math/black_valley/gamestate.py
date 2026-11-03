@@ -21,6 +21,8 @@ class GameState(GameStateOverride):
                 self.start_bonus()
 
             self.evaluate_finalwin()
+            if 0 < self.final_win < 1 and not self.triggered_freegame:
+                self.record({"band": "sub", "gametype": self.config.basegame_type})   # optimiser group tag
             self.check_repeat()
         self.imprint_wins()
 
