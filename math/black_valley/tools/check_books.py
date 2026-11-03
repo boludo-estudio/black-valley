@@ -50,7 +50,7 @@ def check(book):
     if types[0] != "reveal" or types[-1] != "finalWin":
         errs.append("must start with reveal and end with finalWin")
     for i, t in enumerate(types):
-        if t in FEATURE_AFTER and types[i - 1] != "reveal":
+        if t in FEATURE_AFTER and types[i - 1] not in {"reveal"} | FEATURE_AFTER:
             errs.append(f"{t} at {i} does not follow a reveal")
         if t == "pitMultiplier" and "winInfo" not in types[i:i + 30]:
             errs.append(f"pitMultiplier at {i} has no win after it")

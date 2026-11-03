@@ -31,8 +31,8 @@ Outputs go to `black_valley/library/` (not committed until the release build).
 |---|---|---|
 | 1 | Base game: 25 lines, cascades, paytable, strips | done |
 | 2 | The Knock, The Pit, The Fire, The Village Fights Back | done |
-| 3 | Strike / Uprising / Final Stand, boosts, buys | next |
-| 4 | Optimiser to 96.50% per mode, Model A vs B, checks | |
+| 3 | Strike / Uprising / Final Stand, boosts, buys | done |
+| 4 | Optimiser to 96.50% per mode, Model A vs B, checks | next |
 
 ### Stage 1 measurement (natural, unforced, 100k rounds, lines + cascades only)
 
@@ -61,3 +61,20 @@ Changes from spec v0.1, all to hit budget or the 3-star "a feature that fires pa
 - The Knock 1 in 55 (was 35), counts weighted lower. The Pit 1 in 20 (was 25), stronger multipliers.
 - Village tokens 0.2x-50x (was 0.5x-100x), 1 in 80 spins (was 50). Token values ride on the SDK's `prize` field.
 - `tools/check_books.py`: 40,000 base books, 0 failures.
+
+### Stage 3: bonuses and modes
+
+Six modes: `base` (1x), `more_features` (1.5x, base features twice as often), `bonus_chance` (2x, bonus
+rounds weighted up), `strike` (60x), `uprising` (120x), `final_stand` (250x). Mode names carry no buy/bet/pay.
+
+| Bonus | Spins (retrigger, max) | Rules | Natural avg payout (5k buys) | Needed at 96.5% |
+|---|---|---|---|---|
+| The Strike | 10 (+3, 20) | 40% of spins burn one reel; Knock 6%, Pit 7% | 67.4x (112% of price) | 57.9x |
+| The Uprising | 8 (+2, 16) | Multiplier starts x2, +1 per winning cascade step, max x25; Fire 10%, Knock 12%, Pit 12% | 100.0x (83%) | 115.8x |
+| Final Stand | 6 (+2, 12) | Every spin: 1-2 reels burn + collector, tokens 0.5x-500x | 242.3x (96.9%) | 241.25x |
+
+The optimiser (stage 4) closes the remaining gaps by weighting rounds. `freeSpinTrigger` carries `bonus` and
+`totalFs`. Max-win route (forced cap rounds only): Final Stand with 7-8 tokens of 250x/500x, about 1 in 5
+reach 20,000x; the optimiser gives these rounds their real, tiny weight.
+
+`check_books.py`: 8,000 books in each of the six modes, 0 failures.

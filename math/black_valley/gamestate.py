@@ -1,4 +1,5 @@
-"""Black Valley: one game round (book). Stage 2: base game with cascades and the four features."""
+"""Black Valley: one game round (book). Base spin with cascades and features; 3/4/5 choirs start
+The Strike / The Uprising / Final Stand inside the same round."""
 
 from game_override import GameStateOverride
 
@@ -17,20 +18,25 @@ class GameState(GameStateOverride):
             self.win_manager.update_gametype_wins(self.gametype)
 
             if self.check_fs_condition() and self.check_freespin_entry():
-                self.run_freespin_from_base()
+                self.start_bonus()
 
             self.evaluate_finalwin()
             self.check_repeat()
         self.imprint_wins()
 
     def run_freespin(self):
-        """Placeholder bonus (stage 3 replaces it with Strike / Uprising / Final Stand)."""
         self.reset_fs_spin()
+        self.global_multiplier = self.config.bonus_rules[self.bonus].get("start_mult", 1)
+        if self.global_multiplier > 1:
+            from src.events.events import update_global_mult_event
+            update_global_mult_event(self)
         while self.fs < self.tot_fs and not self.wincap_triggered:
             self.update_freespin()
             self.draw_board()
+            self.draw_bonus_features()
+            self.apply_feature()
             self.play_cascades()
-            if self.check_fs_condition():
-                self.update_fs_retrigger_amt()
+            if self.count_special_symbols("scatter") >= 3:
+                self.retrigger_bonus()
             self.win_manager.update_gametype_wins(self.gametype)
         self.end_freespin()
