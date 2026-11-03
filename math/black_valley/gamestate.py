@@ -1,4 +1,4 @@
-"""Black Valley: one game round (book). Stage 1: base game with cascades."""
+"""Black Valley: one game round (book). Stage 2: base game with cascades and the four features."""
 
 from game_override import GameStateOverride
 
@@ -11,6 +11,8 @@ class GameState(GameStateOverride):
         while self.repeat:
             self.reset_book()
             self.draw_board()
+            self.draw_feature()
+            self.apply_feature()
             self.play_cascades()
             self.win_manager.update_gametype_wins(self.gametype)
 

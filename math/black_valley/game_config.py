@@ -56,7 +56,19 @@ class GameConfig(Config):
         self.paylines = {i + 1: line for i, line in enumerate(lines)}
 
         self.include_padding = True
-        self.special_symbols = {"wild": ["W"], "scatter": ["S"]}
+        self.special_symbols = {"wild": ["W"], "scatter": ["S"], "token": ["T"], "collector": ["C"]}
+
+        # Feature tables (spec: Base-game features). Weights, not probabilities.
+        self.feature_values = {
+            "knock_count": {3: 45, 4: 30, 5: 15, 6: 7, 8: 3},
+            "pit_mults": {2: 45, 3: 30, 5: 17, 10: 8},
+            "fire_reels": {1: 90, 2: 10},
+            "token_count": {3: 35, 4: 25, 5: 18, 6: 12, 7: 6, 8: 4},
+            "token_values": {0.2: 350, 0.5: 300, 1: 200, 2: 100, 5: 35, 10: 12, 25: 2.5, 50: 0.5},
+        }
+        # Per spin: Knock 1/55, Pit 1/20, Fire 1/100, Village 1/80 (out of 10,500)
+        base_features = {"none": 9_548, "knock": 191, "pit": 525, "fire": 105, "village": 131}
+        self.fire_burn_steps = 1      # burning reels stay wild for the first cascade step, then burn out
 
         # 3 choirs = The Strike, 4 = The Uprising, 5 = Final Stand (stage 3 maps these to bonuses)
         self.freespin_triggers = {
@@ -72,6 +84,7 @@ class GameConfig(Config):
 
         basegame_condition = {
             "reel_weights": {self.basegame_type: {"BR0": 1}},
+            "feature_weights": {self.basegame_type: base_features},
             "force_wincap": False,
             "force_freegame": False,
         }

@@ -10,6 +10,7 @@ class GameStateOverride(GameExecutables):
 
     def reset_book(self):
         super().reset_book()
+        self.reset_spin_features()
 
     def assign_special_sym_function(self):
         self.special_symbol_functions = {}

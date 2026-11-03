@@ -41,10 +41,13 @@ def main():
 
     rng = random.Random(args.seed)
     wins, cascades, scatters, fs = [], [], {}, 0
+    feats = {}
     for i in range(args.n):
         gs.run_spin(i, rng.randrange(2**31))
         wins.append(gs.final_win / cost)
         cascades.append(getattr(gs, "cascades", 0))
+        f = feats.setdefault(getattr(gs, "feature", "none"), [0, 0.0, 0])
+        f[0] += 1; f[1] += gs.final_win / cost; f[2] += 1 if gs.final_win > 0 else 0
         fs += 1 if gs.triggered_freegame else 0
 
     n = len(wins)
@@ -54,6 +57,9 @@ def main():
     print(f"RTP {rtp:.4f} | hit rate {hit:.3%} (1 in {1/hit:.2f}) | std dev {statistics.pstdev(wins):.3f}")
     print(f"profitable (>1x) {sum(1 for w in wins if w > 1)/n:.3%} | sub-stake wins {sum(1 for w in wins if 0 < w < 1)/n:.3%}")
     print(f"avg cascades {statistics.mean(cascades):.3f} | max {max(cascades)} | bonus triggers {fs} (1 in {n/fs if fs else float('inf'):.0f})")
+    print("feature      freq          avg win   hit     RTP share")
+    for k, (c, w, h) in sorted(feats.items(), key=lambda x: -x[1][0]):
+        print(f"  {k:<9} 1 in {n/c:>7.1f}   {w/c:>7.2f}x  {h/c:>6.1%}   {w/n:.4f}")
     for t in (1, 2, 5, 10, 25, 50, 100, 500, 1000, 5000, 10000, 20000):
         c = sum(1 for w in wins if w >= t)
         print(f"  >= {t:>6}x : {c/n:.6%}" + (f"  (1 in {n/c:,.0f})" if c else ""))
