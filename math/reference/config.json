@@ -1,0 +1,168 @@
+{
+    "workingName": "Black Valley",
+    "frontendConfig": {
+        "file": "fe_config.json",
+        "sha256": "2ad9bb21f2f1289edcbff7af489dd955025122df8447aea3a00aeb01fc015e19"
+    },
+    "gameID": "black_valley",
+    "rtp": 96.5,
+    "betDenomination": 1000,
+    "minDenomination": 10,
+    "providerNumber": 0,
+    "standardForceFile": {
+        "file": "force.json",
+        "sha256": "a28786199ef1e9e9812e36ec46602f5e42c46c37c91c73d3eb7fc3a18887c671"
+    },
+    "bookShelfConfig": [
+        {
+            "name": "base",
+            "tables": [
+                {
+                    "file": "lookUpTable_base_0.csv",
+                    "sha256": "783e71a290c9d004bea13f9cae90d2dc4b90e0225fa0a74f04f2fe1c1eafd250"
+                }
+            ],
+            "cost": 1.0,
+            "rtp": 0.965,
+            "std": 9.19,
+            "bookLength": 100000,
+            "feature": true,
+            "autoEndRoundDisabled": false,
+            "buyBonus": false,
+            "maxWin": 20000.0,
+            "booksFile": {
+                "file": "books_base.jsonl.zst",
+                "sha256": "cc28edaba95e764386f93b3e19f822b61a0395613629cf9e848bd36a787ff58a"
+            },
+            "forceFile": {
+                "file": "force_record_base.json",
+                "sha256": "36f37d63457992f211f18a0f37e0a2ce3a961a1d1a57768831382a34ee66ef57"
+            }
+        },
+        {
+            "name": "more_features",
+            "tables": [
+                {
+                    "file": "lookUpTable_more_features_0.csv",
+                    "sha256": "180824ec38a563f4fca1aafc748657d49c906a76a12c8edf10fd8292dcfc2668"
+                }
+            ],
+            "cost": 1.5,
+            "rtp": 0.965,
+            "std": 8.14,
+            "bookLength": 100000,
+            "feature": true,
+            "autoEndRoundDisabled": false,
+            "buyBonus": false,
+            "maxWin": 20000.0,
+            "booksFile": {
+                "file": "books_more_features.jsonl.zst",
+                "sha256": "63845d549d9e35aa45c2da024a8fab43782686a4a0f26437eaaade87268c3bc8"
+            },
+            "forceFile": {
+                "file": "force_record_more_features.json",
+                "sha256": "49a6c3cd50015dd04411aea8ec7a68d44f6a73014ae4827c81279f4da3bb46bb"
+            }
+        },
+        {
+            "name": "bonus_chance",
+            "tables": [
+                {
+                    "file": "lookUpTable_bonus_chance_0.csv",
+                    "sha256": "6d8ccd53372376ca34c7ad82c8d13a2ffb1a2230204785c604fd7f8d9a87ca1f"
+                }
+            ],
+            "cost": 2.0,
+            "rtp": 0.965,
+            "std": 7.73,
+            "bookLength": 100000,
+            "feature": true,
+            "autoEndRoundDisabled": false,
+            "buyBonus": false,
+            "maxWin": 20000.0,
+            "booksFile": {
+                "file": "books_bonus_chance.jsonl.zst",
+                "sha256": "a7fd047612c770bfd9b9db84894af3c2469104c4e8ef66dc46d3258228b634b2"
+            },
+            "forceFile": {
+                "file": "force_record_bonus_chance.json",
+                "sha256": "30ad4251188f359eda236137a12a9e6965c7b9e7d763b89c258c198583d78284"
+            }
+        },
+        {
+            "name": "strike",
+            "tables": [
+                {
+                    "file": "lookUpTable_strike_0.csv",
+                    "sha256": "9f1edbff61089ff3598296d1ddf198fa48282fa74fad8a1d2601af5f799b1e80"
+                }
+            ],
+            "cost": 60.0,
+            "rtp": 0.965,
+            "std": 1.39,
+            "bookLength": 100000,
+            "feature": false,
+            "autoEndRoundDisabled": false,
+            "buyBonus": true,
+            "maxWin": 20000.0,
+            "booksFile": {
+                "file": "books_strike.jsonl.zst",
+                "sha256": "2cea711dadbd36af4a7b4e51fe5de4a5ea068bbb4eed4746be9ec23ccfb06efa"
+            },
+            "forceFile": {
+                "file": "force_record_strike.json",
+                "sha256": "ba1b79d14edd061312fc37f2f4cdcee33aedd63fad5a90419e89ec362c1d8680"
+            }
+        },
+        {
+            "name": "uprising",
+            "tables": [
+                {
+                    "file": "lookUpTable_uprising_0.csv",
+                    "sha256": "3923acd95c568c97f8b802d6b4fd9b1fcaed9abd5a4850860de110be61b2d522"
+                }
+            ],
+            "cost": 120.0,
+            "rtp": 0.965,
+            "std": 1.33,
+            "bookLength": 100000,
+            "feature": false,
+            "autoEndRoundDisabled": false,
+            "buyBonus": true,
+            "maxWin": 20000.0,
+            "booksFile": {
+                "file": "books_uprising.jsonl.zst",
+                "sha256": "15288787ee31a6f1e62e3441ef6bc8c5310109bd86e95185bf7db806111bbe43"
+            },
+            "forceFile": {
+                "file": "force_record_uprising.json",
+                "sha256": "59f5d8994f89117eb3b1d1eb08efa300fee2f19426f0afc9d13978e353f811ac"
+            }
+        },
+        {
+            "name": "final_stand",
+            "tables": [
+                {
+                    "file": "lookUpTable_final_stand_0.csv",
+                    "sha256": "910e83e96abffbfb196764040268d4817a8cbb0bfc3305f922fd9db55759fbda"
+                }
+            ],
+            "cost": 250.0,
+            "rtp": 0.965,
+            "std": 1.0,
+            "bookLength": 100000,
+            "feature": false,
+            "autoEndRoundDisabled": false,
+            "buyBonus": true,
+            "maxWin": 20000.0,
+            "booksFile": {
+                "file": "books_final_stand.jsonl.zst",
+                "sha256": "dfc145d58cb698df82c44abda2f07ed099e6d831dd8d2f793a5cd2cfcc5e7a95"
+            },
+            "forceFile": {
+                "file": "force_record_final_stand.json",
+                "sha256": "1449e13c4eb952dd126b15f0f3aae1fe3a4f1b5b64db5c63b0f498c900abe5cd"
+            }
+        }
+    ]
+}

@@ -1,0 +1,715 @@
+{
+    "game_id": "black_valley",
+    "bet_modes": [
+        {
+            "bet_mode": "base",
+            "cost": 1.0,
+            "rtp": 0.965,
+            "max_win": 20000.0
+        },
+        {
+            "bet_mode": "more_features",
+            "cost": 1.5,
+            "rtp": 0.965,
+            "max_win": 20000.0
+        },
+        {
+            "bet_mode": "bonus_chance",
+            "cost": 2.0,
+            "rtp": 0.965,
+            "max_win": 20000.0
+        },
+        {
+            "bet_mode": "strike",
+            "cost": 60.0,
+            "rtp": 0.965,
+            "max_win": 20000.0
+        },
+        {
+            "bet_mode": "uprising",
+            "cost": 120.0,
+            "rtp": 0.965,
+            "max_win": 20000.0
+        },
+        {
+            "bet_mode": "final_stand",
+            "cost": 250.0,
+            "rtp": 0.965,
+            "max_win": 20000.0
+        }
+    ],
+    "fences": [
+        {
+            "bet_mode": "base",
+            "fences": [
+                {
+                    "name": "wincap",
+                    "avg_win": "20000.0",
+                    "rtp": "0.0025",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": 20000.0,
+                        "win_range_end": 20000.0,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "0",
+                    "avg_win": "0",
+                    "rtp": "0",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": 0,
+                        "win_range_end": 0,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "freegame",
+                    "hr": "250",
+                    "rtp": "0.3",
+                    "identity_condition": {
+                        "search": [
+                            {
+                                "name": "symbol",
+                                "value": "scatter"
+                            }
+                        ],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "sub",
+                    "hr": "4.55",
+                    "rtp": "0.12088",
+                    "identity_condition": {
+                        "search": [
+                            {
+                                "name": "band",
+                                "value": "sub"
+                            }
+                        ],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "low",
+                    "hr": "13.3",
+                    "rtp": "0.0985",
+                    "identity_condition": {
+                        "search": [
+                            {
+                                "name": "band",
+                                "value": "low"
+                            }
+                        ],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "basegame",
+                    "hr": "11",
+                    "rtp": "0.44312",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                }
+            ]
+        },
+        {
+            "bet_mode": "more_features",
+            "fences": [
+                {
+                    "name": "wincap",
+                    "avg_win": "20000.0",
+                    "rtp": "0.0025",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": 20000.0,
+                        "win_range_end": 20000.0,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "0",
+                    "avg_win": "0",
+                    "rtp": "0",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": 0,
+                        "win_range_end": 0,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "freegame",
+                    "hr": "180",
+                    "rtp": "0.3",
+                    "identity_condition": {
+                        "search": [
+                            {
+                                "name": "symbol",
+                                "value": "scatter"
+                            }
+                        ],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "sub",
+                    "hr": "4.55",
+                    "rtp": "0.08059",
+                    "identity_condition": {
+                        "search": [
+                            {
+                                "name": "band",
+                                "value": "sub"
+                            }
+                        ],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "low",
+                    "hr": "13.3",
+                    "rtp": "0.06566",
+                    "identity_condition": {
+                        "search": [
+                            {
+                                "name": "band",
+                                "value": "low"
+                            }
+                        ],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "basegame",
+                    "hr": "7.5",
+                    "rtp": "0.51625",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                }
+            ]
+        },
+        {
+            "bet_mode": "bonus_chance",
+            "fences": [
+                {
+                    "name": "wincap",
+                    "avg_win": "20000.0",
+                    "rtp": "0.0025",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": 20000.0,
+                        "win_range_end": 20000.0,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "0",
+                    "avg_win": "0",
+                    "rtp": "0",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": 0,
+                        "win_range_end": 0,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "freegame",
+                    "hr": "64",
+                    "rtp": "0.6325",
+                    "identity_condition": {
+                        "search": [
+                            {
+                                "name": "symbol",
+                                "value": "scatter"
+                            }
+                        ],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "sub",
+                    "hr": "4.55",
+                    "rtp": "0.06044",
+                    "identity_condition": {
+                        "search": [
+                            {
+                                "name": "band",
+                                "value": "sub"
+                            }
+                        ],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "low",
+                    "hr": "13.3",
+                    "rtp": "0.04925",
+                    "identity_condition": {
+                        "search": [
+                            {
+                                "name": "band",
+                                "value": "low"
+                            }
+                        ],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "basegame",
+                    "hr": "11",
+                    "rtp": "0.22031",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                }
+            ]
+        },
+        {
+            "bet_mode": "strike",
+            "fences": [
+                {
+                    "name": "freegame",
+                    "hr": "x",
+                    "rtp": "0.965",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                }
+            ]
+        },
+        {
+            "bet_mode": "uprising",
+            "fences": [
+                {
+                    "name": "freegame",
+                    "hr": "x",
+                    "rtp": "0.965",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                }
+            ]
+        },
+        {
+            "bet_mode": "final_stand",
+            "fences": [
+                {
+                    "name": "freegame",
+                    "hr": "x",
+                    "rtp": "0.9625",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": -1,
+                        "win_range_end": -1,
+                        "opposite": false
+                    }
+                },
+                {
+                    "name": "wincap",
+                    "avg_win": "20000.0",
+                    "rtp": "0.0025",
+                    "identity_condition": {
+                        "search": [],
+                        "win_range_start": 20000.0,
+                        "win_range_end": 20000.0,
+                        "opposite": false
+                    }
+                }
+            ]
+        }
+    ],
+    "dresses": [
+        {
+            "bet_mode": "base",
+            "dresses": [
+                {
+                    "fence": "basegame",
+                    "scale_factor": "0.6",
+                    "identity_condition_win_range": [
+                        0.01,
+                        1
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        1,
+                        2
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "1.8",
+                    "identity_condition_win_range": [
+                        2,
+                        10
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "1.2",
+                    "identity_condition_win_range": [
+                        10,
+                        20
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        50,
+                        500
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "freegame",
+                    "scale_factor": "1.2",
+                    "identity_condition_win_range": [
+                        20,
+                        200
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "freegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        1000,
+                        10000
+                    ],
+                    "prob": 1.0
+                }
+            ]
+        },
+        {
+            "bet_mode": "more_features",
+            "dresses": [
+                {
+                    "fence": "basegame",
+                    "scale_factor": "0.6",
+                    "identity_condition_win_range": [
+                        0.01,
+                        1
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        1,
+                        2
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "1.8",
+                    "identity_condition_win_range": [
+                        2,
+                        10
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "1.2",
+                    "identity_condition_win_range": [
+                        10,
+                        20
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        50,
+                        500
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "freegame",
+                    "scale_factor": "1.2",
+                    "identity_condition_win_range": [
+                        20,
+                        200
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "freegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        1000,
+                        10000
+                    ],
+                    "prob": 1.0
+                }
+            ]
+        },
+        {
+            "bet_mode": "bonus_chance",
+            "dresses": [
+                {
+                    "fence": "basegame",
+                    "scale_factor": "0.6",
+                    "identity_condition_win_range": [
+                        0.01,
+                        1
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        1,
+                        2
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "1.8",
+                    "identity_condition_win_range": [
+                        2,
+                        10
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "1.2",
+                    "identity_condition_win_range": [
+                        10,
+                        20
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "basegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        50,
+                        500
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "freegame",
+                    "scale_factor": "1.2",
+                    "identity_condition_win_range": [
+                        20,
+                        200
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "freegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        1000,
+                        10000
+                    ],
+                    "prob": 1.0
+                }
+            ]
+        },
+        {
+            "bet_mode": "strike",
+            "dresses": [
+                {
+                    "fence": "freegame",
+                    "scale_factor": "1.2",
+                    "identity_condition_win_range": [
+                        20,
+                        200
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "freegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        1000,
+                        10000
+                    ],
+                    "prob": 1.0
+                }
+            ]
+        },
+        {
+            "bet_mode": "uprising",
+            "dresses": [
+                {
+                    "fence": "freegame",
+                    "scale_factor": "1.2",
+                    "identity_condition_win_range": [
+                        20,
+                        200
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "freegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        1000,
+                        10000
+                    ],
+                    "prob": 1.0
+                }
+            ]
+        },
+        {
+            "bet_mode": "final_stand",
+            "dresses": [
+                {
+                    "fence": "freegame",
+                    "scale_factor": "1.2",
+                    "identity_condition_win_range": [
+                        20,
+                        200
+                    ],
+                    "prob": 1.0
+                },
+                {
+                    "fence": "freegame",
+                    "scale_factor": "0.8",
+                    "identity_condition_win_range": [
+                        1000,
+                        10000
+                    ],
+                    "prob": 1.0
+                }
+            ]
+        }
+    ],
+    "bias": [
+        {
+            "bet_mode": "base",
+            "bias": [
+                {
+                    "criteria": "basegame",
+                    "range": [
+                        2.0,
+                        8.0
+                    ],
+                    "prob": 0.5
+                }
+            ]
+        },
+        {
+            "bet_mode": "more_features",
+            "bias": [
+                {
+                    "criteria": "basegame",
+                    "range": [
+                        2.0,
+                        8.0
+                    ],
+                    "prob": 0.5
+                }
+            ]
+        },
+        {
+            "bet_mode": "bonus_chance",
+            "bias": [
+                {
+                    "criteria": "basegame",
+                    "range": [
+                        2.0,
+                        8.0
+                    ],
+                    "prob": 0.5
+                }
+            ]
+        },
+        {
+            "bet_mode": "strike",
+            "bias": [
+                {
+                    "criteria": "freegame",
+                    "range": [
+                        0.5,
+                        1.5
+                    ],
+                    "prob": 0.3
+                }
+            ]
+        },
+        {
+            "bet_mode": "uprising",
+            "bias": [
+                {
+                    "criteria": "freegame",
+                    "range": [
+                        0.5,
+                        1.5
+                    ],
+                    "prob": 0.3
+                }
+            ]
+        },
+        {
+            "bet_mode": "final_stand",
+            "bias": [
+                {
+                    "criteria": "freegame",
+                    "range": [
+                        0.5,
+                        1.5
+                    ],
+                    "prob": 0.3
+                }
+            ]
+        }
+    ]
+}

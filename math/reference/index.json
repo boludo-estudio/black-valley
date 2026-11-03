@@ -1,0 +1,40 @@
+{
+    "modes": [
+        {
+            "name": "base",
+            "cost": 1.0,
+            "events": "books_base.jsonl.zst",
+            "weights": "lookUpTable_base_0.csv"
+        },
+        {
+            "name": "more_features",
+            "cost": 1.5,
+            "events": "books_more_features.jsonl.zst",
+            "weights": "lookUpTable_more_features_0.csv"
+        },
+        {
+            "name": "bonus_chance",
+            "cost": 2.0,
+            "events": "books_bonus_chance.jsonl.zst",
+            "weights": "lookUpTable_bonus_chance_0.csv"
+        },
+        {
+            "name": "strike",
+            "cost": 60.0,
+            "events": "books_strike.jsonl.zst",
+            "weights": "lookUpTable_strike_0.csv"
+        },
+        {
+            "name": "uprising",
+            "cost": 120.0,
+            "events": "books_uprising.jsonl.zst",
+            "weights": "lookUpTable_uprising_0.csv"
+        },
+        {
+            "name": "final_stand",
+            "cost": 250.0,
+            "events": "books_final_stand.jsonl.zst",
+            "weights": "lookUpTable_final_stand_0.csv"
+        }
+    ]
+}
