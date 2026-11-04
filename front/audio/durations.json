@@ -1,0 +1,22 @@
+{
+ "music_base": 94.0,
+ "music_bonus": 94.0,
+ "gate": 1.587,
+ "descent": 2.32,
+ "land": 1.848,
+ "wheel": 3.916,
+ "knock": 1.903,
+ "helmet": 0.882,
+ "gutter": 2.0,
+ "paper": 0.695,
+ "stamp": 0.214,
+ "type": 3.0,
+ "wind": 18.5,
+ "fire": 4.766,
+ "choir": 3.413,
+ "pen": 0.892,
+ "coal1": 1.0,
+ "coal2": 1.0,
+ "crowd": 5.993,
+ "vo_notyet": 0.78
+}

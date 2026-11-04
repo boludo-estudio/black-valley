@@ -1,0 +1,22 @@
+{
+ "scale": 0.66667,
+ "pages": [
+  "haskett.webp"
+ ],
+ "timing": {
+  "crack": {
+   "frames": {
+    "c2_flick": 0.0,
+    "c3_grin": 0.4,
+    "c4_crack": 0.95,
+    "c5_glove": 1.8,
+    "c6_cold": 2.55
+   },
+   "length": 3.0
+  }
+ },
+ "pen": [
+  -14.9,
+  -393.3
+ ]
+}

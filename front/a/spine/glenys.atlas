@@ -1,0 +1,14 @@
+glenys.webp
+size:2048,816
+filter:Linear,Linear
+pma:false
+body
+bounds:1,1,324,810
+g2_cheer
+bounds:327,1,273,682
+g1_idle
+bounds:602,1,253,648
+face_closed
+bounds:857,1,108,54
+face_wink
+bounds:967,1,108,54

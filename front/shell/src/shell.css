@@ -1,0 +1,47 @@
+/* hustle-shell/src/shell.css — frame rules every game shares, plus the default cards.
+   Engine: fit the frame with no scrolling at 1024x576, 800x450, 400x225 and 425x812; no double-tap zoom. */
+
+html, body { margin: 0; height: 100%; overflow: hidden; overscroll-behavior: none; }
+body { touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+* { box-sizing: border-box; }
+
+/* Replay: hide balance, bet controls, autoplay and buys. Mark them in the game with data-hs. */
+body[data-replay="true"] [data-hs~="balance"],
+body[data-replay="true"] [data-hs~="bet"],
+body[data-replay="true"] [data-hs~="auto"],
+body[data-replay="true"] [data-hs~="buy"],
+body[data-replay="true"] [data-hs~="spin"] { display: none !important; }
+
+.hs-layer { position: fixed; inset: 0; display: grid; place-items: center; pointer-events: none; z-index: 1000; }
+.hs-layer:not(:empty) { pointer-events: auto; background: rgba(0, 0, 0, .55); }
+.hs-card {
+  max-width: min(92vw, 420px); max-height: 92vh; overflow: hidden;
+  padding: clamp(10px, 3vmin, 22px); border-radius: 14px;
+  background: var(--hs-card, #15151c); color: var(--hs-text, #fff);
+  font: clamp(11px, 2.6vmin, 16px)/1.35 var(--hs-font, system-ui, sans-serif); text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
+}
+.hs-card h2, .hs-card h3 { margin: 0 0 .5em; }
+.hs-row { display: flex; gap: .6em; justify-content: center; margin-top: .8em; }
+.hs-btn {
+  font: inherit; font-weight: 700; padding: .55em 1.2em; border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--hs-accent, #ffcc00); color: #111;
+}
+.hs-ghost { background: transparent; color: inherit; border: 1px solid currentColor; }
+.hs-tag { display: inline-block; font-size: .75em; letter-spacing: .15em; opacity: .7; margin-bottom: .4em; }
+.hs-cost { display: grid; grid-template-columns: repeat(3, auto); gap: .3em 1em; justify-content: center; margin: .4em 0; }
+.hs-cost div { display: flex; flex-direction: column; }
+.hs-cost dt { font-size: .75em; opacity: .7; } .hs-cost dd { margin: 0; font-weight: 700; }
+.hs-real dd { color: var(--hs-accent, #ffcc00); }
+.hs-result { margin: .6em 0; display: grid; } .hs-result b { font-size: 1.6em; }
+.hs-go { margin-top: .6em; }
+.hs-note {
+  position: fixed; left: 50%; bottom: 12%; transform: translate(-50%, 20px); opacity: 0;
+  padding: .5em 1em; border-radius: 999px; background: rgba(0, 0, 0, .8); color: #fff;
+  font: 600 clamp(11px, 2.4vmin, 15px) system-ui, sans-serif; transition: .25s; pointer-events: none; z-index: 1001;
+}
+.hs-note.in { opacity: 1; transform: translate(-50%, 0); }
+.hs-rules { text-align: left; } .hs-modes { width: 100%; border-collapse: collapse; }
+.hs-modes td, .hs-modes th { padding: .25em .4em; border-bottom: 1px solid rgba(255,255,255,.12); }
+.hs-disclaimer { font-size: .8em; opacity: .75; }
+@media (max-height: 300px) { .hs-card { font-size: 10px; padding: 8px; } }

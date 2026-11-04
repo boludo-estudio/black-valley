@@ -1,0 +1,15 @@
+{
+ "scale": 0.66667,
+ "pages": [
+  "glenys.webp"
+ ],
+ "timing": {
+  "cheer": {
+   "frames": {
+    "g2_cheer": 0.0,
+    "g1_idle": 1.7
+   },
+   "length": 2.1
+  }
+ }
+}

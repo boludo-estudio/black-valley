@@ -1,0 +1,35 @@
+{
+ "scale": 0.66667,
+ "pages": [
+  "owen.webp"
+ ],
+ "timing": {
+  "lightup": {
+   "frames": {
+    "k2_look": 0.0,
+    "k3_cap": 0.34,
+    "k4_raise": 0.66,
+    "k5_tap": 1.0,
+    "k6_lit": 1.73
+   },
+   "length": 2.13
+  },
+  "douse": {
+   "frames": {
+    "k5_tap": 0.0,
+    "k4_raise": 0.22,
+    "k3_cap": 0.44,
+    "k2_look": 0.66
+   },
+   "length": 0.92
+  }
+ },
+ "lamp": [
+  20.2,
+  -663.2
+ ],
+ "tap": [
+  31.8,
+  -677.3
+ ]
+}
