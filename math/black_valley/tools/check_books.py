@@ -54,6 +54,13 @@ def check(book):
             errs.append(f"{t} at {i} does not follow a reveal")
         if t == "pitMultiplier" and "winInfo" not in types[i:i + 30]:
             errs.append(f"pitMultiplier at {i} has no win after it")
+    for i, e in enumerate(ev):
+        if e["type"] == "tumbleBoard":
+            for c, col in enumerate(e["newSymbols"]):
+                gone = {p["row"] for p in e["explodingSymbols"] if p["reel"] == c}
+                if len(gone) != len(col):
+                    errs.append(f"tumbleBoard at {i}: reel {c} removes {len(gone)} but drops {len(col)}")
+                    break
     paid = sum(w["win"] for e in ev if e["type"] == "winInfo" for w in e["wins"])
     paid += sum(e["amount"] for e in ev if e["type"] == "collect")
     final = ev[-1]["amount"]

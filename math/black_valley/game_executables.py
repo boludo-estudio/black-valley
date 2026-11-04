@@ -208,6 +208,22 @@ class GameExecutables(GameCalculations):
         self.collect_tokens()
         self.set_end_tumble_event()
 
+    def tumble_game_board(self):
+        """Remove the marked symbols and refill, then emit tumbleBoard listing only the cells that really broke.
+        (The SDK's own event lists every winning position, which would include burning reels that stay.)"""
+        removed = sorted({(r, w) for r, reel in enumerate(self.board) for w, sym in enumerate(reel) if sym.explode})
+        self.tumble_board()
+        pad = 1 if self.config.include_padding else 0
+        special = list(self.config.special_symbols.keys())
+        from src.events.events import json_ready_sym
+        new_symbols = [[json_ready_sym(sym, special) for sym in col] for col in self.new_symbols_from_tumble]
+        self.book.add_event({
+            "index": len(self.book.events),
+            "type": "tumbleBoard",
+            "newSymbols": new_symbols,
+            "explodingSymbols": [{"reel": r, "row": w + pad} for r, w in removed],
+        }, copy=False)
+
     def _has_removable(self):
         return any(sym.explode for reel in self.board for sym in reel)
 
