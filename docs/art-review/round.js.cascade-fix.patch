@@ -1,0 +1,33 @@
+--- a/06_playable_game/round.js
++++ b/06_playable_game/round.js
+@@ -234,8 +234,20 @@
+  LS.animate([{opacity:1},{opacity:0}],{duration:180}).onfinish=()=>{LS.innerHTML=''};tags.forEach(t=>t.remove());
+  document.querySelectorAll('.cell.hit').forEach(c=>c.classList.remove('hit'))}
+ 
++/* Engine (math-sdk) tumbleBoard: explodingSymbols (may repeat a cell) + newSymbols per reel, top to bottom.
++   With a padding row, newSymbols[c][0] is the reel's new hidden top symbol; the cells that drop in are
++   newSymbols[c].slice(1) followed by the previous hidden top symbol. */
++let TOPPAD=null;
++function boardAfterTumble(e,dead){const out=[];
++ for(let c=0;c<5;c++){const gone=new Set(dead.filter(p=>p.reel===c).map(p=>p.row));const keep=PB[c].filter((_,r)=>!gone.has(r));
++  const ns=(e.newSymbols[c]||[]).map(s=>({...s}));let drop;
++  if(!gone.size){out.push(PB[c].map(s=>({...s})));continue}
++  if(TOPPAD){drop=ns.slice(1).concat([{...TOPPAD[c]}]);TOPPAD[c]=ns[0]}else drop=ns;
++  out.push(drop.slice(-gone.size).concat(keep))}
++ return out}
++
+ /* ---------- cascades: winners break into coal, the rest fall, new symbols drop in ---------- */
+-async function tumble(e){const dead=e.explodingSymbols.map(P),b=unpad(e.board);SND.play('coal1',{g:.8,r:.7});SND.play('coal2',{g:.6,r:.62});
++async function tumble(e){const dead=e.explodingSymbols.map(P),b=e.board?unpad(e.board):boardAfterTumble(e,dead);SND.play('coal1',{g:.8,r:.7});SND.play('coal2',{g:.6,r:.62});
+  for(const p of dead){cellEl(p.reel,p.row).classList.add('gone');shatter(p.reel,p.row)}
+  await wait(260);
+  for(let c=0;c<5;c++){const gone=new Set(dead.filter(p=>p.reel===c).map(p=>p.row));if(!gone.size)continue;
+@@ -322,7 +334,7 @@
+  $('#win').textContent='0.00';bal-=BET*BETCOST;$('#bal').textContent=bal.toFixed(2);
+  for(const e0 of E){const e=e0.type==='freeSpinTrigger'&&inFs?{...e0,type:'freeSpinRetrigger'}:e0;   // a trigger inside a bonus is a retrigger
+   switch(e.type){
+-  case 'reveal':{const b=unpad(e.board);PADR=e.board[0].length===7?1:0;tumbles=0;spinWin=0;TW.style.display='none';await fireOut();FIRE.reels=[];await spinTo(b);break}
++  case 'reveal':{const b=unpad(e.board);PADR=e.board[0].length===7?1:0;TOPPAD=PADR?e.board.map(col=>col[0]):null;tumbles=0;spinWin=0;TW.style.display='none';await fireOut();FIRE.reels=[];await spinTo(b);break}
+   case 'knock':await knockTakeover(e.positions);break;
+   case 'fireExpand':await fireExpand(e.reels);break;
+   case 'villageTokens':await villageTokens(e.tokens,e.collector);break;
